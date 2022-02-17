@@ -18,6 +18,8 @@
 		FA7C96E827BC872200154580 /* GenreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7C96E727BC872200154580 /* GenreManager.swift */; };
 		FA7C96EC27BCAA5600154580 /* TVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7C96EB27BCAA5600154580 /* TVViewController.swift */; };
 		FA7C96EE27BCAE6600154580 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7C96ED27BCAE6600154580 /* OptionsViewController.swift */; };
+		FA7C96F027BDC68300154580 /* OptionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7C96EF27BDC68300154580 /* OptionData.swift */; };
+		FA7C96F227BDCACF00154580 /* OptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7C96F127BDCACF00154580 /* OptionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		FA7C96E727BC872200154580 /* GenreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreManager.swift; sourceTree = "<group>"; };
 		FA7C96EB27BCAA5600154580 /* TVViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVViewController.swift; sourceTree = "<group>"; };
 		FA7C96ED27BCAE6600154580 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		FA7C96EF27BDC68300154580 /* OptionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionData.swift; sourceTree = "<group>"; };
+		FA7C96F127BDCACF00154580 /* OptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,8 @@
 			children = (
 				FA7C96E527BC86FA00154580 /* GenreData.swift */,
 				FA7C96E727BC872200154580 /* GenreManager.swift */,
+				FA7C96EF27BDC68300154580 /* OptionData.swift */,
+				FA7C96F127BDCACF00154580 /* OptionManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,6 +184,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA7C96EC27BCAA5600154580 /* TVViewController.swift in Sources */,
+				FA7C96F227BDCACF00154580 /* OptionManager.swift in Sources */,
+				FA7C96F027BDC68300154580 /* OptionData.swift in Sources */,
 				FA7C96EE27BCAE6600154580 /* OptionsViewController.swift in Sources */,
 				FA7C96E427BC82AC00154580 /* MovieViewController.swift in Sources */,
 				FA7C96CA27BC7B9D00154580 /* AppDelegate.swift in Sources */,

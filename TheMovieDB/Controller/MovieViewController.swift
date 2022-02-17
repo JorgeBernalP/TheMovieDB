@@ -12,6 +12,7 @@ class MovieViewController: UITableViewController {
     var genreManager = GenreManager()
     
     var movieGenreArray: [String]?
+    var movieGenreIdArray: [Int]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +53,9 @@ class MovieViewController: UITableViewController {
         let destinationVC = segue.destination as! OptionsViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.type = "movie"
             destinationVC.genreName = movieGenreArray?[indexPath.row]
+            destinationVC.genreID = movieGenreIdArray?[indexPath.row]
         }
     }
     
@@ -65,6 +68,9 @@ extension MovieViewController: GenreManagerDelegate {
         DispatchQueue.main.async {
             self.movieGenreArray = genres.map({ genre in
                 genre.name
+            })
+            self.movieGenreIdArray = genres.map({ genre in
+                genre.id
             })
             self.tableView.reloadData()
         }

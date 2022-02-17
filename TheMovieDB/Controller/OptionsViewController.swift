@@ -11,83 +11,86 @@ private let reuseIdentifier = "Cell"
 
 class OptionsViewController: UICollectionViewController {
     
+    var optionManager = OptionManager()
+    
+    var type: String?
     var genreName: String?
     var genreID: Int?
-
+    
+    var optionsImagesArray: [String]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "\(genreName!)"
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        
+        optionManager.delegate = self
+        
+        optionManager.getMovies(type!, for: genreID!)
+        
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+        
         // Do any additional setup after loading the view.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
     // MARK: UICollectionViewDataSource
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
-
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return optionsImagesArray?.count ?? 0
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let mdbImageUrl = "https://image.tmdb.org/t/p/w500\(optionsImagesArray?[indexPath.row] ?? "")"
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+        
+        if let url = URL(string: mdbImageUrl)
+        {
+            DispatchQueue.global().async {
+                if let data = try? Data( contentsOf:url)
+                {
+                    DispatchQueue.main.async {
+                        let view = UIView()
+                        let imageView = UIImageView(image: UIImage(data: data)!)
+                        imageView.frame = CGRect(x: 0, y: 0, width: 131, height: 197)
+                        view.addSubview(imageView)
+                        view.bringSubviewToFront(imageView)
+                        cell.backgroundView = view
+                    }
+                }
+            }
+        }
+        
         return cell
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
-    }
-    */
+}
 
+extension OptionsViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 131, height: 197)
+    }
+    
+}
+
+extension OptionsViewController: OptionManagerDelegate {
+    
+    func didGetMovies(_ options: [Result]) {
+        DispatchQueue.main.async {
+            self.optionsImagesArray = options.map({ movie in
+                movie.posterPath
+            })
+            self.collectionView.reloadData()
+        }
+    }
+    
 }
