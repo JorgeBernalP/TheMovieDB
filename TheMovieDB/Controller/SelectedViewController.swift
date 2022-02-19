@@ -31,6 +31,18 @@ class SelectedViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
 }
 
 extension SelectedViewController: SelectedManagerDelegate {
@@ -42,7 +54,7 @@ extension SelectedViewController: SelectedManagerDelegate {
             self.selectedRating.text = "\(selected.ratingAverage)(\(selected.ratingCount))"
             self.selectedRuntime.text = "\(selected.runtime)min"
             self.selectedOverview.text = selected.overview
-            if let url = URL(string: "https://image.tmdb.org/t/p/w500\(selected.image)") {
+            if let url = URL(string: "https://image.tmdb.org/t/p/original\(selected.image)") {
                 if let data = try? Data(contentsOf: url)
                 {
                     self.selectedImage.image = UIImage(data: data)
