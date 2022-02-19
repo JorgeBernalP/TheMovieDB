@@ -18,6 +18,7 @@ class OptionsViewController: UICollectionViewController {
     var genreID: Int?
     
     var optionsImagesArray: [String]?
+    var optionsIDs: [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +73,19 @@ class OptionsViewController: UICollectionViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "SelectedOption", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! SelectedViewController
+        
+        if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+            destinationVC.type = type
+            destinationVC.selectedId = optionsIDs?[indexPath.row]
+        }
+    }
+    
 }
 
 extension OptionsViewController: UICollectionViewDelegateFlowLayout {
@@ -88,6 +102,9 @@ extension OptionsViewController: OptionManagerDelegate {
         DispatchQueue.main.async {
             self.optionsImagesArray = options.map({ movie in
                 movie.posterPath
+            })
+            self.optionsIDs = options.map({ movie in
+                String(movie.id)
             })
             self.collectionView.reloadData()
         }
