@@ -34,7 +34,6 @@ struct SelectedManager {
                 
                 if let safeData = data {
                     if let safeSelected = self.parseJSON(safeData, type) {
-                        print(safeSelected)
                         delegate?.didGetSelectedOptionDetails(selected: safeSelected)
                     }
                 }
@@ -57,7 +56,7 @@ struct SelectedManager {
                 
                 let decodedData = try decoder.decode(SelectedMovieData.self, from: data)
                 
-                let selected = Selected(title: decodedData.originalTitle, image: decodedData.backdropPath, releaseDate: decodedData.releaseDate, ratingCount: decodedData.voteCount, ratingAverage: decodedData.voteAverage, runtime: decodedData.runtime, overview: decodedData.overview)
+                let selected = Selected(title: decodedData.title, image: decodedData.backdropPath, releaseDate: decodedData.releaseDate, ratingCount: decodedData.voteCount, ratingAverage: decodedData.voteAverage, runtime: decodedData.runtime, overview: decodedData.overview)
                 
                 return selected
                 
@@ -73,7 +72,7 @@ struct SelectedManager {
                 
                 let decodedData = try decoder.decode(SelectedTVData.self, from: data)
                 
-                let selected = Selected(title: decodedData.originalName, image: decodedData.backdropPath, releaseDate: decodedData.firstAirDate, ratingCount: decodedData.voteCount, ratingAverage: decodedData.voteAverage, runtime: decodedData.episodeRunTime[0], overview: decodedData.overview)
+                let selected = Selected(title: decodedData.name, image: decodedData.backdropPath, releaseDate: decodedData.firstAirDate, ratingCount: decodedData.voteCount, ratingAverage: decodedData.voteAverage, runtime: decodedData.episodeRunTime[0], overview: decodedData.overview)
                 
                 return selected
                 

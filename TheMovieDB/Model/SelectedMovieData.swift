@@ -10,7 +10,7 @@ import Foundation
 struct SelectedMovieData: Codable {
     let backdropPath: String
     let id: Int
-    let originalTitle: String
+    let title: String
     let overview: String
     let releaseDate: String
     let runtime: Int
@@ -20,7 +20,7 @@ struct SelectedMovieData: Codable {
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
         case id = "id"
-        case originalTitle = "original_title"
+        case title = "title"
         case overview = "overview"
         case releaseDate = "release_date"
         case runtime = "runtime"

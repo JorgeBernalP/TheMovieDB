@@ -58,8 +58,6 @@ class MovieViewController: UITableViewController {
             destinationVC.genreID = movieGenreIdArray?[indexPath.row]
         }
     }
-    
-    
 
 }
 

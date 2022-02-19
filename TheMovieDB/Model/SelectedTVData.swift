@@ -12,7 +12,7 @@ struct SelectedTVData: Codable {
     let episodeRunTime: [Int]
     let firstAirDate: String
     let id: Int
-    let originalName: String
+    let name: String
     let overview: String
     let voteAverage: Double
     let voteCount: Int
@@ -20,7 +20,7 @@ struct SelectedTVData: Codable {
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
         case id = "id"
-        case originalName = "original_name"
+        case name = "name"
         case overview = "overview"
         case firstAirDate = "first_air_date"
         case episodeRunTime = "episode_run_time"
